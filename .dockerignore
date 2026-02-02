@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Docs
+docs/
+.docs/
+*.md
+!README.md
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Config (will be mounted as volumes)
+config/
+dashboards/
+
+# Tests
+tests/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+prometheus_data/
+data/
+*.log

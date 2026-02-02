@@ -1,0 +1,32 @@
+[Unit]
+Description=System Resource Metrics Exporter
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=monitoring
+Group=monitoring
+WorkingDirectory=/opt/system-monitoring
+ExecStart=/usr/bin/python3 /opt/system-monitoring/src/exporters/metrics_exporter.py
+Restart=on-failure
+RestartSec=10s
+
+# Security settings
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log/system-monitoring
+
+# Resource limits
+MemoryLimit=200M
+CPUQuota=5%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=metrics-exporter
+
+[Install]
+WantedBy=multi-user.target

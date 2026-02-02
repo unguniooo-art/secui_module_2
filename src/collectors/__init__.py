@@ -4,6 +4,7 @@ from .cpu_collector import CPUCollector
 from .memory_collector import MemoryCollector
 from .disk_collector import DiskCollector
 from .network_collector import NetworkCollector
+from .process_collector import ProcessCollector
 
 __all__ = [
     'BaseCollector',
@@ -11,4 +12,5 @@ __all__ = [
     'MemoryCollector',
     'DiskCollector',
     'NetworkCollector',
+    'ProcessCollector',
 ]

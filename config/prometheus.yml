@@ -1,0 +1,32 @@
+# Prometheus configuration for system resource monitoring
+
+global:
+  scrape_interval: 15s      # Scrape metrics every 15 seconds
+  scrape_timeout: 10s       # Timeout after 10 seconds
+  evaluation_interval: 15s  # Evaluate rules every 15 seconds
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - localhost:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - "alerts/*.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Metrics exporter
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['localhost:9100']
+        labels:
+          instance: 'local-server'
+          env: 'development'
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

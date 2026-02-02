@@ -1,0 +1,80 @@
+groups:
+  - name: system_resources
+    interval: 15s
+    rules:
+      # CPU alerts
+      - alert: HighCPUUsage
+        expr: node_cpu_usage_percent > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is above 80% for more than 5 minutes (current: {{ $value }}%)"
+
+      - alert: CriticalCPUUsage
+        expr: node_cpu_usage_percent > 95
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical CPU usage detected"
+          description: "CPU usage is above 95% for more than 2 minutes (current: {{ $value }}%)"
+
+      # Memory alerts
+      - alert: HighMemoryUsage
+        expr: node_memory_usage_percent > 90
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is above 90% for more than 3 minutes (current: {{ $value }}%)"
+
+      - alert: CriticalMemoryUsage
+        expr: node_memory_usage_percent > 95
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical memory usage detected"
+          description: "Memory usage is above 95% (current: {{ $value }}%)"
+
+      # Swap alerts
+      - alert: SwapUsageStarted
+        expr: node_swap_usage_percent > 10
+        for: 1m
+        labels:
+          severity: info
+        annotations:
+          summary: "Swap memory usage started"
+          description: "System is using swap memory ({{ $value }}%)"
+
+      # Disk alerts
+      - alert: HighDiskUsage
+        expr: node_disk_usage_percent > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High disk usage on {{ $labels.mountpoint }}"
+          description: "Disk usage is above 85% on {{ $labels.mountpoint }} (current: {{ $value }}%)"
+
+      - alert: CriticalDiskUsage
+        expr: node_disk_usage_percent > 95
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical disk usage on {{ $labels.mountpoint }}"
+          description: "Disk usage is above 95% on {{ $labels.mountpoint }} (current: {{ $value }}%)"
+
+      # Load average alerts
+      - alert: HighLoadAverage
+        expr: node_load_average{period="5m"} > (node_cpu_count * 1.5)
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High load average"
+          description: "5-minute load average is 1.5x the number of CPU cores"

@@ -24,6 +24,71 @@
 
 핵심 데이터 흐름: `psutil → Exporter (:9100) ← Prometheus → Grafana`
 
+## 대안 기술 스택 (간단한 구현)
+
+프로젝트 요구사항에 따라 다음과 같은 간단한 대안을 고려할 수 있습니다:
+
+### 1. Node.js 기반 (가장 간단)
+```
+메트릭 수집: systeminformation (npm)
+메트릭 노출: prom-client
+저장: Prometheus
+시각화: Grafana
+```
+
+**30분 안에 시작하기:**
+```bash
+npm install express systeminformation prom-client
+node exporter.js  # Python 없이 동일한 기능
+```
+
+**장점:** JavaScript로 풀스택 개발, 비동기 처리로 고성능
+**단점:** systeminformation이 일부 플랫폼에서 제한적
+
+### 2. 실시간 웹 대시보드 (프로토타입)
+```
+백엔드: Node.js + Express
+실시간 통신: Socket.io
+프론트엔드: Chart.js / ApexCharts
+메트릭: systeminformation
+```
+
+**1시간 안에 완성:**
+```bash
+npm install express socket.io systeminformation
+node server.js
+# 브라우저에서 localhost:3000으로 실시간 모니터링
+```
+
+**장점:** 설정 없이 즉시 시각화, 모바일 지원
+**단점:** 데이터 저장 기능 없음, 장기 분석 불가
+
+### 3. 올인원 솔루션 (설정 제로)
+```
+도구: Netdata (단일 바이너리)
+설치: curl -Ss https://get.netdata.cloud/kickstart.sh | bash
+접속: http://localhost:19999
+```
+
+**5분 안에 완료:**
+- 자동으로 모든 시스템 메트릭 수집
+- 실시간 대시보드 제공 (1초 해상도)
+- 알림 내장
+
+**장점:** 제로 설정, 초고성능, 즉시 사용 가능
+**단점:** 커스터마이징 제한적, 장기 저장은 별도 설정 필요
+
+### 선택 가이드
+
+| 요구사항 | 추천 스택 | 구현 시간 |
+|---------|----------|----------|
+| **학습 목적** | Python + Prometheus (현재) | 2-3시간 |
+| **빠른 프로토타입** | Node.js + Socket.io | 1시간 |
+| **즉시 사용** | Netdata | 5분 |
+| **JavaScript 선호** | Node.js + prom-client | 30분 |
+
+**현재 프로젝트는 Python + Prometheus 스택을 기본으로 사용합니다.**
+
 ## 개발 명령어
 
 ### 설치

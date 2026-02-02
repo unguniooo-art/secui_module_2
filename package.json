@@ -1,0 +1,17 @@
+{
+  "name": "system-resource-monitoring",
+  "version": "1.0.0",
+  "description": "System resource monitoring with Node.js",
+  "main": "src/exporters/metrics_exporter.js",
+  "scripts": {
+    "start": "node src/exporters/metrics_exporter_node.js",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": ["monitoring", "metrics", "prometheus"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "systeminformation": "^5.21.0",
+    "prom-client": "^15.1.0"
+  }
+}

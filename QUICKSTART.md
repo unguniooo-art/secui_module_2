@@ -1,37 +1,59 @@
 # 빠른 시작 가이드
 
+## 🎨 새로운 기능: 실시간 대시보드!
+
+Node.js 버전이 **아름다운 실시간 웹 대시보드**를 포함하도록 업데이트되었습니다!
+
+**주요 특징:**
+- 🎯 실시간 메트릭 업데이트 (3초마다)
+- 📊 시각적 프로그레스 바
+- 💻 CPU, 메모리, 디스크 사용률 표시
+- ⚙️ 시스템 정보 자동 감지
+- 📱 반응형 디자인 (모바일 지원)
+- 🎨 모던한 그라디언트 UI
+
+**접속 주소:** http://localhost:9100/
+
 ## Windows에서 실행하기
 
-### 방법 1: 배치 파일 사용 (가장 쉬움)
+### ⭐ 방법 1: Node.js 버전 (가장 쉬움 + UI 대시보드!)
 
-1. `run_exporter.bat` 파일을 더블클릭
+1. `run_exporter_node.bat` 파일을 더블클릭
 2. 자동으로 의존성 설치 및 실행
-3. 브라우저에서 `http://localhost:9100/metrics` 접속
+3. 브라우저에서 접속:
+   - **대시보드**: `http://localhost:9100/` (실시간 UI)
+   - **메트릭**: `http://localhost:9100/metrics` (Prometheus)
+   - **API**: `http://localhost:9100/api/metrics` (JSON)
 
-### 방법 2: 명령 프롬프트 (CMD)
+### 방법 2: 명령 프롬프트로 Node.js 실행
 
 ```cmd
-# 1. 의존성 설치
-python -m pip install psutil prometheus-client
+# 1. 프로젝트 디렉토리로 이동
+cd C:\Users\student\Desktop\VibeCoding\module_4
 
-# 2. 익스포터 실행
-python src\exporters\metrics_exporter.py
+# 2. 의존성 설치 (최초 1회만)
+npm install
 
-# 3. 다른 터미널에서 메트릭 확인
-curl http://localhost:9100/metrics
+# 3. 익스포터 실행
+node src\exporters\metrics_exporter_node.js
+
+# 4. 브라우저에서 확인
+# http://localhost:9100/ - 실시간 대시보드
 ```
 
-### 방법 3: PowerShell
+### 방법 3: Python 버전 (대시보드 없음)
 
-```powershell
-# 1. 의존성 설치
+```cmd
+# 1. Python 설치 필요 (INSTALL_PYTHON.md 참고)
+
+# 2. 의존성 설치
 python -m pip install psutil prometheus-client
 
-# 2. 익스포터 실행
-python src/exporters/metrics_exporter.py
+# 3. 익스포터 실행
+python src\exporters\metrics_exporter.py
 
-# 3. 메트릭 확인
-Invoke-WebRequest http://localhost:9100/metrics
+# 4. 메트릭만 확인 가능
+# http://localhost:9100/metrics
 ```
 
 ## 테스트 실행

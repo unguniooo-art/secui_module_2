@@ -1,41 +1,63 @@
 # System Resource Monitoring
 
-Python 기반 시스템 리소스 모니터링 시스템. Prometheus와 Grafana를 사용하여 CPU, 메모리, 디스크, 네트워크 메트릭을 수집하고 시각화합니다.
+시스템 리소스 모니터링 시스템. CPU, 메모리, 디스크, 네트워크 메트릭을 수집하고 **실시간 웹 대시보드**로 시각화합니다.
 
-## 빠른 시작
+## ✨ 새로운 기능: 실시간 대시보드
 
-### 1. 의존성 설치
+**Node.js 버전**이 아름다운 실시간 대시보드를 제공합니다!
+
+### 주요 특징
+- 🎯 **실시간 업데이트** - 3초마다 자동 갱신
+- 📊 **시각적 프로그레스 바** - CPU, 메모리, 디스크 사용률
+- 💻 **시스템 정보** - 호스트명, OS, CPU 모델 자동 감지
+- 📱 **반응형 디자인** - PC, 태블릿, 모바일 지원
+- 🎨 **모던 UI** - 그라디언트 디자인, 부드러운 애니메이션
+- 🚀 **즉시 실행** - Docker, Python 설치 불필요
+
+### 스크린샷
+```
+┌─────────────────────────────────────────────┐
+│ 💻 CPU 사용률          🧠 메모리 사용률      │
+│    45.2%                   68.4%            │
+│ ████████░░░░░░░░░      ████████████░░░░     │
+│                                             │
+│ 💾 디스크 사용률                            │
+│ C:\ (NTFS)    45.8%                         │
+│ ████████░░░░░░░░░                          │
+│                                             │
+│ ⚙️ 시스템 정보                              │
+│ • 호스트: DESKTOP-ABC                       │
+│ • OS: Windows 10                            │
+│ • CPU: Intel Core i7 (8 코어)              │
+└─────────────────────────────────────────────┘
+```
+
+## 🚀 빠른 시작 (30초 안에!)
+
+### 방법 1: Node.js 버전 (추천 - 실시간 대시보드!)
+
+```bash
+# Windows 탐색기에서
+run_exporter_node.bat 더블클릭!
+
+# 또는 명령 프롬프트
+npm install
+node src/exporters/metrics_exporter_node.js
+```
+
+**브라우저에서 접속:**
+- 📊 **대시보드**: http://localhost:9100/ (← 여기!)
+- 📈 **메트릭**: http://localhost:9100/metrics
+- 🔌 **API**: http://localhost:9100/api/metrics
+
+### 방법 2: Python 버전 (메트릭만)
 
 ```bash
 pip install -r requirements.txt
-```
-
-### 2. 메트릭 익스포터 실행
-
-```bash
 python src/exporters/metrics_exporter.py
 ```
 
-익스포터가 `http://localhost:9100/metrics`에서 실행됩니다.
-
-### 3. 메트릭 확인
-
-브라우저나 curl로 메트릭을 확인할 수 있습니다:
-
-```bash
-curl http://localhost:9100/metrics
-```
-
-출력 예시:
-```
-# HELP node_cpu_usage_percent CPU usage percentage
-# TYPE node_cpu_usage_percent gauge
-node_cpu_usage_percent 23.4
-
-# HELP node_memory_usage_percent Memory usage percentage
-# TYPE node_memory_usage_percent gauge
-node_memory_usage_percent 45.8
-```
+메트릭 엔드포인트: http://localhost:9100/metrics
 
 ## 프로젝트 구조
 
@@ -62,12 +84,19 @@ module_4/
 
 ## 주요 기능
 
-### 수집되는 메트릭
+### 🎨 실시간 웹 대시보드 (Node.js)
+- 실시간 CPU/메모리/디스크 사용률 표시
+- 컬러풀한 프로그레스 바 (정상/경고/위험)
+- 시스템 정보 자동 감지
+- 3초마다 자동 업데이트
+- JSON API 엔드포인트 제공
 
+### 📊 수집되는 메트릭
 - **CPU**: 사용률, 코어별 사용률, 로드 평균
 - **메모리**: 사용량, 사용률, Swap 메모리
 - **디스크**: 파티션별 사용량, I/O 통계
 - **네트워크**: 인터페이스별 송수신 바이트, 연결 통계
+- **프로세스**: 실행 중인 프로세스 수, Top 프로세스
 
 ### 알림 규칙
 
